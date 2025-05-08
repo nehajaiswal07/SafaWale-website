@@ -1,0 +1,22 @@
+<?php
+$name=$_POST['name'];
+$number=$_POST['number'];
+$email=$_POST['email'];
+
+//database connection
+
+$conn=new mysqli('localhost','root',' ','safa')
+if ($conn->connect_error){
+    die('connection failed :' .$conn->connect_error);
+}
+else{
+    $stmt=$conn->prepare('insert into registration(name,number,email)values(?,?,?');
+    $stmt->bind_param('sis',$name, $number, $email);
+    $stmt->execute();
+    echo "registration successfully...";
+    $stmt->close();
+    $conn->close();
+
+}
+
+?>
